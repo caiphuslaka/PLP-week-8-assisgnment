@@ -1,122 +1,122 @@
 # PLP-week-8- DATABASE-assisgnment
 
 -- Question1
-student records db;
+student_records_db;
 
-USE student records db;
+USE student_records_db;
  
-   student records db departments (
-   department_id  INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the department',
-   department_name` VARCHAR(100) NOT NULL UNIQUE COMMENT 'Name of the department',
-   head_of_department` VARCHAR(100) NULL COMMENT 'Name of the current head of department',
-  PRIMARY KEY (`department_id`)
+  student_records_db departments (
+  department_id INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the department',
+  department_name VARCHAR(100) NOT NULL UNIQUE COMMENT 'Name of the department',
+  head_of_department VARCHAR(100) NULL COMMENT 'Name of the current head of department',
+  PRIMARY KEY (department_id)
 ) ENGINE = InnoDB COMMENT = 'Academic departments';
 
 
-   student_records_db`.`students` (
-   student_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the student',
-   first_name` VARCHAR(50) NOT NULL COMMENT 'Student''s first name',
-   last_name` VARCHAR(50) NOT NULL COMMENT 'Student''s last name',
-   date_of_birth` DATE NULL COMMENT 'Student''s date of birth',
-   email` VARCHAR(100) UNIQUE NULL COMMENT 'Student''s email address',
-   enrollment_date` DATE NOT NULL DEFAULT (CURRENT_DATE()) COMMENT 'Date the student enrolled',
-   major_department_id` INT NULL COMMENT 'Foreign key referencing the student''s major department',
-   PRIMARY KEY (`student_id`),
-  CONSTRAINT `fk_students_departments`
+   student_records db students (
+   student id INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the student',
+   first_name VARCHAR(50) NOT NULL COMMENT 'Student''s first name',
+   last_name  VARCHAR(50) NOT NULL COMMENT 'Student''s last name',
+   date_of_birth  DATE NULL COMMENT 'Student''s date of birth',
+   email  VARCHAR(100) UNIQUE NULL COMMENT 'Student''s email address',
+   enrollment_date  DATE NOT NULL DEFAULT (CURRENT_DATE()) COMMENT 'Date the student enrolled',
+   major_department_id  INT NULL COMMENT 'Foreign key referencing the student''s major department',
+  PRIMARY KEY (`student_id`),
+  CONSTRAINT  fk_students_departments
     FOREIGN KEY (`major_department_id`)
-    REFERENCES `student_records_db`.`departments` (`department_id`)
+    REFERENCES  student_records_db`.`departments  (`department_id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE
 ) ENGINE = InnoDB COMMENT = 'Information about students';
 
 
-   student records_db courses (
-   course_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the course',
-   course_code` VARCHAR(20) NOT NULL UNIQUE COMMENT 'Unique code for the course (e.g., CS101)',
-   course_title` VARCHAR(100) NOT NULL COMMENT 'Full title of the course',
-   credits` INT NOT NULL COMMENT 'Number of credits for the course',
-   department_id` INT NULL COMMENT 'Foreign key referencing the department offering the course',
-  PRIMARY KEY (`course_id`),
-  CONSTRAINT `fk_courses_departments`
-    FOREIGN KEY (`department_id`)
-    REFERENCES `student_records_db`.`departments` (`department_id`)
+  student records_db courses (
+   course_id INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the course',
+   course_code VARCHAR(20) NOT NULL UNIQUE COMMENT 'Unique code for the course (e.g., CS101)',
+   course_title  VARCHAR(100) NOT NULL COMMENT 'Full title of the course',
+   credits INT NOT NULL COMMENT 'Number of credits for the course',
+    department_id  INT NULL COMMENT 'Foreign key referencing the department offering the course',
+  PRIMARY KEY (course_id),
+  CONSTRAINT  fk_courses_departments
+    FOREIGN KEY (department_id)
+    REFERENCES  student_records_db departments  (department_id )
     ON DELETE SET NULL
     ON UPDATE CASCADE
 ) ENGINE = InnoDB COMMENT = 'Academic courses';
 
 
-  `student_records_db`.`instructors` (
-  `instructor_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the instructor',
-  `first_name` VARCHAR(50) NOT NULL COMMENT 'Instructor''s first name',
-  `last_name` VARCHAR(50) NOT NULL COMMENT 'Instructor''s last name',
-  `email` VARCHAR(100) UNIQUE NULL COMMENT 'Instructor''s email address',
-  `department_id` INT NULL COMMENT 'Foreign key referencing the instructor''s department',
-  PRIMARY KEY (`instructor_id`),
-  CONSTRAINT `fk_instructors_departments`
-    FOREIGN KEY (`department_id`)
-    REFERENCES `student_records_db`.`departments` (`department_id`)
+  student_records_db`.`instructors (
+  instructor_id INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the instructor',
+   first_name VARCHAR(50) NOT NULL COMMENT 'Instructor''s first name',
+   last_name VARCHAR(50) NOT NULL COMMENT 'Instructor''s last name',
+   email VARCHAR(100) UNIQUE NULL COMMENT 'Instructor''s email address',
+  department_id INT NULL COMMENT 'Foreign key referencing the instructor''s department',
+  PRIMARY KEY (instructor_id),
+  CONSTRAINT fk_instructors_departments
+    FOREIGN KEY (department_id)
+    REFERENCES student_records_db departments (department_id)
     ON DELETE SET NULL
     ON UPDATE CASCADE
 ) ENGINE = InnoDB COMMENT = 'Information about instructors';
 
 
-  `student_records_db`.`enrollments` (
-  `enrollment_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the enrollment record',
-  `student_id` INT NOT NULL COMMENT 'Foreign key referencing the student',
-  `course_id` INT NOT NULL COMMENT 'Foreign key referencing the course',
-  `enrollment_date` DATE NOT NULL DEFAULT (CURRENT_DATE()) COMMENT 'Date of enrollment',
-  `grade` VARCHAR(5) NULL COMMENT 'Grade received in the course (e.g., A, B+, Pass)',
-  PRIMARY KEY (`enrollment_id`),
-  UNIQUE INDEX `uq_student_course` (`student_id` ASC, `course_id` ASC) COMMENT 'Ensures a student is enrolled in a course only once',
-  INDEX `fk_enrollments_courses1_idx` (`course_id` ASC),
-  CONSTRAINT `fk_enrollments_students1`
-    FOREIGN KEY (`student_id`)
-    REFERENCES `student_records_db`.`students` (`student_id`)
+  student_records_db`.`enrollments (
+  enrollment_id INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the enrollment record',
+  student_id INT NOT NULL COMMENT 'Foreign key referencing the student',
+  course_id INT NOT NULL COMMENT 'Foreign key referencing the course',
+  enrollment_date DATE NOT NULL DEFAULT (CURRENT_DATE()) COMMENT 'Date of enrollment',
+  grade VARCHAR(5) NULL COMMENT 'Grade received in the course (e.g., A, B+, Pass)',
+  PRIMARY KEY (enrollment_id),
+  UNIQUE INDEX uq_student_course (student_id ASC, course_id ASC) COMMENT 'Ensures a student is enrolled in a course only once',
+  INDEX fk_enrollments_courses1_idx (course_id ASC),
+  CONSTRAINT fk_enrollments_students1
+    FOREIGN KEY (student_id)
+    REFERENCES student_records_db students (student_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `fk_enrollments_courses1`
-    FOREIGN KEY (`course_id`)
-    REFERENCES `student_records_db`.`courses` (`course_id`)
+  CONSTRAINT fk_enrollments_courses1
+    FOREIGN KEY (course_id)
+    REFERENCES student_records_db courses (course_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 ) ENGINE = InnoDB COMMENT = 'Records of student enrollments in courses';
 
 
 
-  `student_records_db`.`course_offerings` (
-  `offering_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the course offering',
-  `course_id` INT NOT NULL COMMENT 'Foreign key referencing the course being offered',
-  `instructor_id` INT NOT NULL COMMENT 'Foreign key referencing the instructor teaching the course',
-  `academic_year` YEAR NOT NULL COMMENT 'Academic year the course was offered (e.g., 2023)',
-  `semester` VARCHAR(20) NOT NULL COMMENT 'Semester the course was offered (e.g., Fall, Spring)',
-  PRIMARY KEY (`offering_id`),
-  UNIQUE INDEX `uq_course_instructor_year_semester` (`course_id` ASC, `instructor_id` ASC, `academic_year` ASC, `semester` ASC) COMMENT 'Ensures a unique offering by instructor, year, and semester',
-  INDEX `fk_course_offerings_instructors1_idx` (`instructor_id` ASC),
-  CONSTRAINT `fk_course_offerings_courses1`
-    FOREIGN KEY (`course_id`)
+  student_records_db course_offerings (
+  offering_id INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the course offering',
+  course_id INT NOT NULL COMMENT 'Foreign key referencing the course being offered',
+  instructor_id INT NOT NULL COMMENT 'Foreign key referencing the instructor teaching the course',
+  academic_year  YEAR NOT NULL COMMENT 'Academic year the course was offered (e.g., 2023)',
+   semester VARCHAR(20) NOT NULL COMMENT 'Semester the course was offered (e.g., Fall, Spring)',
+  PRIMARY KEY (offering_id),
+  UNIQUE INDEX uq_course_instructor_year_semester (course_id ASC, instructor_id ASC, `academic_year ASC, semester ASC) COMMENT 'Ensures a unique offering by instructor, year, and semester',
+  INDEX fk_course_offerings_instructors1_idx (instructor_id ASC),
+  CONSTRAINT fk_course_offerings_courses1
+    FOREIGN KEY (course_id)
     REFERENCES `student_records_db`.`courses` (`course_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `fk_course_offerings_instructors1`
-    FOREIGN KEY (`instructor_id`)
-    REFERENCES `student_records_db`.`instructors` (`instructor_id`)
+  CONSTRAINT fk_course_offerings_instructors1
+    FOREIGN KEY (instructor_id)
+    REFERENCES student_records_dbinstructors (instructor_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE
-) ENGINE = InnoDB COMMENT = 'Records of which instructors teach which courses in which semesters';
+) ENGINE = InnoDB COMMENT = Records of which instructors teach which courses in which semesters;
 
 -- Question2
  task_manager_db;
 
 USE task_manager_db;
 
-  `task_manager_db`.`tasks` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the task',
-  `title` VARCHAR(100) NOT NULL COMMENT 'Title of the task',
-  `description` TEXT NULL COMMENT 'Detailed description of the task',
-  `status` ENUM('pending', 'in_progress', 'completed') NOT NULL DEFAULT 'pending' COMMENT 'Current status of the task',
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp when the task was created',
-  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp when the task was last updated',
-  PRIMARY KEY (`id`)
+   task_manager_db tasks (
+  id INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the task',
+  `title VARCHAR(100) NOT NULL COMMENT 'Title of the task',
+  description TEXT NULL COMMENT 'Detailed description of the task',
+  status ENUM('pending', 'in_progress', 'completed') NOT NULL DEFAULT 'pending' COMMENT 'Current status of the task',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamp when the task was created',
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Timestamp when the task was last updated',
+  PRIMARY KEY (id)
 ) ENGINE = InnoDB COMMENT = 'Information about tasks';
 
 import mysql.connector
@@ -318,3 +318,4 @@ def delete_task(task_id: int, db: mysql.connector.MySQLConnection = Depends(get_
 @app.get("/")
 def read_root():
     return {"message": "Task Manager API is running!"}
+

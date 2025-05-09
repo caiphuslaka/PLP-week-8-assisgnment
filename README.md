@@ -1,11 +1,11 @@
 # PLP-week-8- DATABASE-assisgnment
 
 -- Question1
-CREATE DATABASE IF NOT EXISTS student_records_db;
+student_records_db;
 
 USE student_records_db;
  
-CREATE TABLE IF NOT EXISTS `student_records_db`.`departments` (
+  `student_records_db`.`departments` (
   `department_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the department',
   `department_name` VARCHAR(100) NOT NULL UNIQUE COMMENT 'Name of the department',
   `head_of_department` VARCHAR(100) NULL COMMENT 'Name of the current head of department',
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `student_records_db`.`departments` (
 ) ENGINE = InnoDB COMMENT = 'Academic departments';
 
 
-CREATE TABLE IF NOT EXISTS `student_records_db`.`students` (
+  `student_records_db`.`students` (
   `student_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the student',
   `first_name` VARCHAR(50) NOT NULL COMMENT 'Student''s first name',
   `last_name` VARCHAR(50) NOT NULL COMMENT 'Student''s last name',
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `student_records_db`.`students` (
 ) ENGINE = InnoDB COMMENT = 'Information about students';
 
 
-CREATE TABLE IF NOT EXISTS `student_records_db`.`courses` (
+  'student_records_db`.`courses` (
   `course_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the course',
   `course_code` VARCHAR(20) NOT NULL UNIQUE COMMENT 'Unique code for the course (e.g., CS101)',
   `course_title` VARCHAR(100) NOT NULL COMMENT 'Full title of the course',
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `student_records_db`.`courses` (
 ) ENGINE = InnoDB COMMENT = 'Academic courses';
 
 
-CREATE TABLE IF NOT EXISTS `student_records_db`.`instructors` (
+  `student_records_db`.`instructors` (
   `instructor_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the instructor',
   `first_name` VARCHAR(50) NOT NULL COMMENT 'Instructor''s first name',
   `last_name` VARCHAR(50) NOT NULL COMMENT 'Instructor''s last name',
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `student_records_db`.`instructors` (
 ) ENGINE = InnoDB COMMENT = 'Information about instructors';
 
 
-CREATE TABLE IF NOT EXISTS `student_records_db`.`enrollments` (
+  `student_records_db`.`enrollments` (
   `enrollment_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the enrollment record',
   `student_id` INT NOT NULL COMMENT 'Foreign key referencing the student',
   `course_id` INT NOT NULL COMMENT 'Foreign key referencing the course',
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `student_records_db`.`enrollments` (
 
 
 
-CREATE TABLE IF NOT EXISTS `student_records_db`.`course_offerings` (
+  `student_records_db`.`course_offerings` (
   `offering_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the course offering',
   `course_id` INT NOT NULL COMMENT 'Foreign key referencing the course being offered',
   `instructor_id` INT NOT NULL COMMENT 'Foreign key referencing the instructor teaching the course',
@@ -105,11 +105,11 @@ CREATE TABLE IF NOT EXISTS `student_records_db`.`course_offerings` (
 ) ENGINE = InnoDB COMMENT = 'Records of which instructors teach which courses in which semesters';
 
 -- Question2
-CREATE DATABASE IF NOT EXISTS task_manager_db;
+ task_manager_db;
 
 USE task_manager_db;
 
-CREATE TABLE IF NOT EXISTS `task_manager_db`.`tasks` (
+  `task_manager_db`.`tasks` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the task',
   `title` VARCHAR(100) NOT NULL COMMENT 'Title of the task',
   `description` TEXT NULL COMMENT 'Detailed description of the task',

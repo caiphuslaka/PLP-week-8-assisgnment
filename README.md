@@ -1,27 +1,27 @@
 # PLP-week-8- DATABASE-assisgnment
 
 -- Question1
-student_records_db;
+student records db;
 
-USE student_records_db;
+USE student records db;
  
-  `student_records_db`.`departments` (
-  `department_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the department',
-  `department_name` VARCHAR(100) NOT NULL UNIQUE COMMENT 'Name of the department',
-  `head_of_department` VARCHAR(100) NULL COMMENT 'Name of the current head of department',
+   student records db departments (
+   department_id  INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the department',
+   department_name` VARCHAR(100) NOT NULL UNIQUE COMMENT 'Name of the department',
+   head_of_department` VARCHAR(100) NULL COMMENT 'Name of the current head of department',
   PRIMARY KEY (`department_id`)
 ) ENGINE = InnoDB COMMENT = 'Academic departments';
 
 
-  `student_records_db`.`students` (
-  `student_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the student',
-  `first_name` VARCHAR(50) NOT NULL COMMENT 'Student''s first name',
-  `last_name` VARCHAR(50) NOT NULL COMMENT 'Student''s last name',
-  `date_of_birth` DATE NULL COMMENT 'Student''s date of birth',
-  `email` VARCHAR(100) UNIQUE NULL COMMENT 'Student''s email address',
-  `enrollment_date` DATE NOT NULL DEFAULT (CURRENT_DATE()) COMMENT 'Date the student enrolled',
-  `major_department_id` INT NULL COMMENT 'Foreign key referencing the student''s major department',
-  PRIMARY KEY (`student_id`),
+   student_records_db`.`students` (
+   student_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the student',
+   first_name` VARCHAR(50) NOT NULL COMMENT 'Student''s first name',
+   last_name` VARCHAR(50) NOT NULL COMMENT 'Student''s last name',
+   date_of_birth` DATE NULL COMMENT 'Student''s date of birth',
+   email` VARCHAR(100) UNIQUE NULL COMMENT 'Student''s email address',
+   enrollment_date` DATE NOT NULL DEFAULT (CURRENT_DATE()) COMMENT 'Date the student enrolled',
+   major_department_id` INT NULL COMMENT 'Foreign key referencing the student''s major department',
+   PRIMARY KEY (`student_id`),
   CONSTRAINT `fk_students_departments`
     FOREIGN KEY (`major_department_id`)
     REFERENCES `student_records_db`.`departments` (`department_id`)
@@ -30,12 +30,12 @@ USE student_records_db;
 ) ENGINE = InnoDB COMMENT = 'Information about students';
 
 
-  'student_records_db`.`courses` (
-  `course_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the course',
-  `course_code` VARCHAR(20) NOT NULL UNIQUE COMMENT 'Unique code for the course (e.g., CS101)',
-  `course_title` VARCHAR(100) NOT NULL COMMENT 'Full title of the course',
-  `credits` INT NOT NULL COMMENT 'Number of credits for the course',
-  `department_id` INT NULL COMMENT 'Foreign key referencing the department offering the course',
+   student records_db courses (
+   course_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier for the course',
+   course_code` VARCHAR(20) NOT NULL UNIQUE COMMENT 'Unique code for the course (e.g., CS101)',
+   course_title` VARCHAR(100) NOT NULL COMMENT 'Full title of the course',
+   credits` INT NOT NULL COMMENT 'Number of credits for the course',
+   department_id` INT NULL COMMENT 'Foreign key referencing the department offering the course',
   PRIMARY KEY (`course_id`),
   CONSTRAINT `fk_courses_departments`
     FOREIGN KEY (`department_id`)
